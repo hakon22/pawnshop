@@ -1,0 +1,48 @@
+{
+  "name": "pawnshop",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "api",
+    "web",
+    "shared"
+  ],
+  "scripts": {
+    "dev:api": "npm run start:dev -w api",
+    "dev:web": "npm run dev -w web",
+    "build": "npm run build -w shared && npm run build -w api && npm run build -w web",
+    "build:api": "npm run build -w api",
+    "build:web": "npm run build -w web",
+    "start:server:prod": "npm run start:prod -w api",
+    "start:server:docker:dev": "cross-env IS_DOCKER=TRUE NODE_ENV=production node api/dist/api/src/main.js",
+    "start:web:prod": "npm run preview -w web",
+    "lint": "eslint \"api/src\" \"web/src\" \"shared\"",
+    "typecheck": "npm run typecheck -w shared && npm run typecheck -w api && npm run typecheck -w web",
+    "test": "npm run test -w api",
+    "check": "npm run lint && npm run typecheck && npm run test",
+    "migration:create": "typeorm migration:create",
+    "migration:create:name": "tsx api/src/infrastructure/db/migrations/helpers/create-migration.helper.ts",
+    "migration:run": "cross-env NODE_ENV=development tsx ./node_modules/typeorm/cli.js migration:run -d api/src/infrastructure/db/data-source.ts",
+    "migration:run:prod": "cross-env NODE_ENV=production node ./node_modules/typeorm/cli.js migration:run -d api/dist/api/src/infrastructure/db/data-source.js",
+    "migration:revert": "cross-env NODE_ENV=development tsx ./node_modules/typeorm/cli.js migration:revert -d api/src/infrastructure/db/data-source.ts",
+    "seed": "tsx api/src/infrastructure/db/seeds/run-seed.ts"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "3.3.6",
+    "@eslint/js": "9.39.5",
+    "@stylistic/eslint-plugin": "5.10.0",
+    "@types/node": "26.1.1",
+    "@typescript-eslint/eslint-plugin": "8.65.0",
+    "@typescript-eslint/parser": "8.65.0",
+    "cross-env": "10.1.0",
+    "eslint": "9.39.5",
+    "eslint-import-resolver-typescript": "4.4.5",
+    "eslint-plugin-import": "2.32.0",
+    "eslint-plugin-react": "7.37.5",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "globals": "17.7.0",
+    "tsc-alias": "1.9.1",
+    "tsx": "4.23.1",
+    "typescript": "6.0.3"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "name": "@pawnshop/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start:dev": "tsx watch src/main.ts",
+    "start:prod": "cross-env NODE_ENV=production node dist/api/src/main.js",
+    "build": "tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json --resolve-full-paths",
+    "typecheck": "tsc -p tsconfig.build.json --noEmit",
+    "test": "cross-env DB_TYPE=sqljs NODE_ENV=test node --experimental-vm-modules ../node_modules/jest/bin/jest.js --config ./jest.config.cjs --runInBand"
+  },
+  "dependencies": {
+    "@nestjs/common": "11.1.28",
+    "@nestjs/core": "11.1.28",
+    "@nestjs/platform-express": "11.1.28",
+    "dotenv": "17.4.2",
+    "express": "5.2.1",
+    "lodash-es": "4.18.1",
+    "moment": "2.30.1",
+    "moment-timezone": "0.6.3",
+    "pg": "8.22.0",
+    "reflect-metadata": "0.2.2",
+    "rxjs": "7.8.2",
+    "sql.js": "1.14.1",
+    "typeorm": "1.1.0",
+    "winston": "3.19.0",
+    "winston-daily-rotate-file": "5.0.0",
+    "yup": "1.7.1"
+  },
+  "devDependencies": {
+    "@nestjs/testing": "11.1.28",
+    "@types/express": "5.0.6",
+    "@types/jest": "30.0.0",
+    "@types/lodash-es": "4.17.12",
+    "@types/node": "26.1.1",
+    "@types/pg": "8.20.0",
+    "@types/supertest": "7.2.1",
+    "jest": "30.4.2",
+    "lodash": "4.18.1",
+    "supertest": "7.2.2",
+    "ts-jest": "29.4.11",
+    "tsc-alias": "1.9.1",
+    "tsconfig-paths": "4.2.0"
+  }
+}

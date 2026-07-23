@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #1e3a5f;
+  --color-secondary: #2563eb;
+  --color-accent: #059669;
+  --color-bg: #f8fafc;
+  --color-ink: #0f172a;
+  --color-muted: #64748b;
+  --color-panel: #ffffff;
+  --color-border: #e4e7eb;
+  --color-destructive: #dc2626;
+  --color-ring: #1e3a5f;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "IBM Plex Sans", sans-serif;
+  color: var(--color-ink);
+  background:
+    radial-gradient(circle at top left, rgba(30, 58, 95, 0.1), transparent 42%),
+    linear-gradient(160deg, #f8fafc 0%, #eef2f7 100%);
+  touch-action: manipulation;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes fade-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ui-fade-in {
+  animation: fade-slide-in 220ms ease-out;
+}
+
+/* Tailwind preflight ломает вертикальное центрирование Ant Modal через ::before */
+.ant-modal-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ant-modal {
+  top: 0;
+  padding-bottom: 0;
+}

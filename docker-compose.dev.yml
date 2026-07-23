@@ -1,0 +1,26 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: pawnshop-api-dev:latest
+    env_file: .env
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "3001:3001"
+    volumes:
+      - "/srv/logs:/srv/logs"
+    command: start:server:docker:dev
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+      args:
+        VITE_API_BASE_URL: http://localhost:3001/api/v1
+    image: pawnshop-web-dev:latest
+    ports:
+      - "3017:80"
+    depends_on:
+      - api
