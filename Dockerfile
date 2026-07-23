@@ -11,6 +11,7 @@ FROM node:22-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+
 RUN npm run build -w shared && npm run build -w api
 RUN npx tsc-alias -p api/tsconfig.json --resolve-full-paths || true
 
